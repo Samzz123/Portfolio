@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samyo Ghosh • Full-Stack Developer Portfolio</title>
+    <meta
+      name="description"
+      content="Samyo Ghosh - full-stack developer portfolio with projects, skills, resume link, and contact information for job applications."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+
+    <header class="hero section card reveal">
+      <nav class="nav">
+        <span class="brand">Samyo Ghosh</span>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+          <a class="glass-button cv-button" href="RESUME.pdf" download>📄 CV</a>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <p class="eyebrow">Full-Stack Web Developer • UI/UX-Focused Builder</p>
+        <h1>Samyo Ghosh</h1>
+        <p class="lead">
+          I’m a full-stack web developer passionate about design and technology. I build
+          modern, performant websites with clean architecture, smooth interactions, and
+          user-friendly experiences that are production-ready.
+        </p>
+        <div class="cta-row">
+          <a class="glass-button" href="#projects">Explore Projects</a>
+          <a id="github-cta" class="glass-button secondary" href="https://github.com/samyoghosh2004" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="glass-button secondary" href="mailto:samyoghosh2004@gmail.com">Email Me</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="about" class="section reveal">
+        <div class="section-heading">
+          <h2>About Me</h2>
+        </div>
+        <article class="card about-card">
+          <p>
+            Hi, I'm Samyo — a full-stack developer experienced in crafting modern, performant
+            websites. I enjoy creating engaging digital experiences with clean design and interactive UI/UX.
+          </p>
+          <p>
+            I am currently seeking internships and entry-level software roles where I can contribute
+            to real products, collaborate with teams, and continue growing across frontend and backend development.
+          </p>
+          <a href="#contact" class="glass-button">Let's Talk</a>
+        </article>
+      </section>
+
+      <section id="skills" class="section reveal">
+        <div class="section-heading">
+          <h2>My Skills</h2>
+          <p>Core technologies I use to build web products.</p>
+        </div>
+        <div class="card skills-panel">
+          <div class="skills-grid-static">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>React</span>
+            <span>Bootstrap</span>
+            <span>Figma</span>
+            <span>Tailwind CSS</span>
+            <span>Node.js</span>
+          </div>
+          <div id="skills-cloud" class="skills-cloud"></div>
+        </div>
+      </section>
+
+      <section id="projects" class="section reveal">
+        <div class="section-heading">
+          <h2>My Projects</h2>
+          <p>Live repositories from GitHub plus curated highlights.</p>
+        </div>
+        <div id="project-grid" class="grid"></div>
+      </section>
+
+      <section id="experience" class="section reveal">
+        <div class="section-heading">
+          <h2>Experience & Education</h2>
+          <p>Highlights useful for job applications.</p>
+        </div>
+        <div class="grid timeline-grid">
+          <article class="card about-card">
+            <h3>Career Objective</h3>
+            <p>
+              Looking for internships and entry-level software roles to contribute to production-grade
+              web applications while strengthening backend architecture and system design skills.
+            </p>
+          </article>
+          <article class="card about-card">
+            <h3>Education</h3>
+            <p>
+              Undergraduate student with strong focus on Data Structures, Algorithms, OOP,
+              and practical web development projects.
+            </p>
+          </article>
+          <article class="card about-card">
+            <h3>Work Style</h3>
+            <p>
+              Comfortable with Git workflows, debugging, API integration, and iterative UI polishing.
+              I focus on writing maintainable code and collaborating effectively.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section reveal">
+        <div class="section-heading">
+          <h2>Contact Me</h2>
+          <p>Let’s connect for internships, job opportunities, or collaborations.</p>
+        </div>
+        <div class="card contact-card">
+          <p><strong>Name:</strong> Samyo Ghosh</p>
+          <p><strong>Email:</strong> <a href="mailto:samyoghosh2004@gmail.com">samyoghosh2004@gmail.com</a></p>
+          <p><strong>Phone:</strong> Available on request</p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/samyoghosh2004" target="_blank" rel="noreferrer">github.com/samyoghosh2004</a></p>
+          <p><strong>Location:</strong> India</p>
+          <form id="contact-form" class="contact-form">
+            <input type="text" name="name" placeholder="Name" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="text" name="subject" placeholder="Subject" />
+            <textarea name="message" placeholder="Message..." rows="5"></textarea>
+            <button type="submit" class="glass-button">Send</button>
+          </form>
+          <p id="form-status" class="status-text" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="section footer">
+      <p>© <span id="year"></span> Samyo Ghosh. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
