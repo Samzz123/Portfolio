@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samyo Ghosh • Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio website for Samyo Ghosh featuring projects, skills, and contact details."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+
+    <header class="hero section card reveal">
+      <nav class="nav">
+        <span class="brand">Samyo Ghosh</span>
+        <a href="#contact" class="glass-button">Contact</a>
+      </nav>
+
+      <div class="hero-content">
+        <p class="eyebrow">Developer • Problem Solver • Builder</p>
+        <h1>Crafting polished digital experiences with an iOS-inspired touch.</h1>
+        <p class="lead">
+          Hi, I'm Samyo Ghosh. I build modern, performant, and elegant web experiences.
+          This portfolio automatically syncs projects and technologies from my GitHub profile.
+        </p>
+        <div class="cta-row">
+          <a class="glass-button" href="#projects">View Projects</a>
+          <a id="github-cta" class="glass-button secondary" href="https://github.com/samyoghosh2004" target="_blank" rel="noreferrer">GitHub Profile</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="projects" class="section reveal">
+        <div class="section-heading">
+          <h2>Projects</h2>
+          <p>Loaded dynamically from GitHub repositories.</p>
+        </div>
+        <div id="project-grid" class="grid"></div>
+      </section>
+
+      <section id="skills" class="section reveal">
+        <div class="section-heading">
+          <h2>Skills</h2>
+          <p>Technologies inferred from repository language data.</p>
+        </div>
+        <div id="skills-cloud" class="skills-cloud"></div>
+      </section>
+
+      <section id="about" class="section reveal">
+        <div class="section-heading">
+          <h2>About Me</h2>
+        </div>
+        <article class="card about-card">
+          <p>
+            I focus on creating user-friendly interfaces with smooth transitions,
+            responsive layouts, and clean architecture. My style blends visual
+            minimalism with practical engineering to deliver products that feel
+            delightful and reliable.
+          </p>
+        </article>
+      </section>
+
+      <section id="contact" class="section reveal">
+        <div class="section-heading">
+          <h2>Contact</h2>
+        </div>
+        <div class="card contact-card">
+          <a href="mailto:samyoghosh2004@gmail.com">samyoghosh2004@gmail.com</a>
+          <p>Phone: Available on request</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="section footer">
+      <p>© <span id="year"></span> Samyo Ghosh. Built with HTML, CSS, and JavaScript.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
