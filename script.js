@@ -1,6 +1,9 @@
 const githubUser = 'samyoghosh2004';
 const repoApi = `https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=100`;
 
+const linkedinProfileUrl = 'https://www.linkedin.com/in/your-linkedin-username/';
+const linkedinVanity = 'your-linkedin-username';
+
 const fallbackProjects = [
   {
     name: 'Calculator App',
@@ -33,6 +36,10 @@ const skillsCloud = document.getElementById('skills-cloud');
 const githubCta = document.getElementById('github-cta');
 const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
+const linkedinCta = document.getElementById('linkedin-cta');
+const linkedinProfileLink = document.getElementById('linkedin-profile-link');
+const linkedinBadgeRoot = document.getElementById('linkedin-badge-root');
+const linkedinNote = document.getElementById('linkedin-note');
 
 function setupRevealAnimations() {
   if (!('IntersectionObserver' in window)) {
@@ -52,6 +59,56 @@ function setupRevealAnimations() {
   );
 
   document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+}
+
+function setupLinkedIn() {
+  if (!linkedinProfileLink || !linkedinNote) {
+    return;
+  }
+
+  const hasRealLinkedIn = !linkedinProfileUrl.includes('your-linkedin-username');
+
+  if (hasRealLinkedIn) {
+    linkedinProfileLink.href = linkedinProfileUrl;
+    if (linkedinCta) {
+      linkedinCta.href = linkedinProfileUrl;
+      linkedinCta.target = '_blank';
+      linkedinCta.rel = 'noreferrer';
+    }
+    linkedinNote.textContent = 'LinkedIn profile configured. Public badge loads below if vanity username is set.';
+  } else {
+    linkedinProfileLink.href = '#';
+    linkedinProfileLink.setAttribute('aria-disabled', 'true');
+    linkedinProfileLink.classList.add('is-disabled');
+    linkedinNote.textContent = 'Add your LinkedIn URL in script.js (linkedinProfileUrl) to enable direct profile link.';
+  }
+
+  const hasVanity = !linkedinVanity.includes('your-linkedin-username');
+  if (!hasVanity || !linkedinBadgeRoot) {
+    return;
+  }
+
+  linkedinBadgeRoot.innerHTML = `
+    <div
+      class="badge-base LI-profile-badge"
+      data-locale="en_US"
+      data-size="large"
+      data-theme="light"
+      data-type="VERTICAL"
+      data-vanity="${linkedinVanity}"
+      data-version="v1"
+    >
+      <a class="badge-base__link LI-simple-link" href="${linkedinProfileUrl}" target="_blank" rel="noreferrer">
+        View LinkedIn Badge
+      </a>
+    </div>
+  `;
+
+  const script = document.createElement('script');
+  script.src = 'https://platform.linkedin.com/badges/js/profile.js';
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
 }
 
 function formatDate(dateString) {
@@ -121,14 +178,13 @@ function renderProjects(repos) {
 
 function renderSkills(repos) {
   const skills = new Set([
+    'Python',
+    'C',
     'HTML',
     'CSS',
-    'JavaScript',
-    'React',
-    'Bootstrap',
+    'VS Code',
+    'Adobe Illustrator',
     'Figma',
-    'Tailwind CSS',
-    'Node.js',
     'Git',
   ]);
 
@@ -201,7 +257,7 @@ function setupContactForm() {
     event.preventDefault();
     const formData = new FormData(contactForm);
     const name = formData.get('name')?.toString().trim() || 'there';
-    formStatus.textContent = `Thanks ${name}! Please email me directly at samyoghosh2004@gmail.com.`;
+    formStatus.textContent = `Thanks ${name}! Please email me directly at samyoghosh2004@gmail.com or call +91 8240236916.`;
     contactForm.reset();
   });
 }
@@ -212,5 +268,6 @@ if (githubCta) {
 }
 
 setupRevealAnimations();
+setupLinkedIn();
 setupContactForm();
 loadGitHubData();

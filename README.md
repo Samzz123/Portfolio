@@ -2,58 +2,52 @@
 
 A job-application-focused portfolio website with modern visuals, iOS-like fluid UI, and recruiter-friendly content.
 
-## What this portfolio includes
-
-- Professional hero section with clear role positioning: **Full-Stack Web Developer**.
-- Resume/CV download button (`RESUME.pdf`) in top navigation.
-- About section with practical developer summary and career objective.
-- Skills section using both static skill highlights and dynamic GitHub-derived skills.
-- Projects section that loads from GitHub and falls back to curated project cards:
-  - Calculator App
-  - To-Do List App
-  - Portfolio Website
-- Contact section with direct details and a lightweight contact form UI.
-- Experience & Education section to support job-application screening.
-
-## Personal details
+## Updated details from resume
 
 - **Name:** Samyo Ghosh
+- **Location:** Kolkata, India
+- **Phone:** +91 8240236916
 - **Email:** samyoghosh2004@gmail.com
-- **Phone:** Available on request
-- **GitHub:** https://github.com/samyoghosh2004
-- **Location:** India
+- **Education:** Netaji Subhash Engineering College (First Year, GPA 7.5)
+- **Hackathons:** EY TECHATHON 4.0 (qualified till second round), TATA STEEL TomorrowLAB 2023
+- **Languages:** English, Bengali, Hindi
+- **Hobbies:** Fitness, Swimming, Drawing
 
-## Tech stack
+## What this portfolio includes
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- GitHub REST API
+- Professional hero section with clear role positioning.
+- Resume/CV download button (`RESUME.pdf`) in top navigation.
+- Skills section synced with resume and enriched using GitHub language data.
+- Projects section that loads from GitHub and falls back to curated project cards.
+- Experience section with hackathons, education, and profile highlights.
+- Contact section with icons and action-ready communication details.
+- Dedicated LinkedIn section with:
+  - direct profile button
+  - optional public badge embed support
+
+## LinkedIn setup options
+
+Set these constants in `script.js`:
+
+```js
+const linkedinProfileUrl = 'https://www.linkedin.com/in/your-linkedin-username/';
+const linkedinVanity = 'your-linkedin-username';
+```
+
+- If `linkedinProfileUrl` is set, the profile button becomes active.
+- If both are set, the LinkedIn public badge script is loaded and badge markup is rendered.
 
 ## Project structure
 
 ```text
 .
-├── index.html      # Main portfolio sections and content (about, skills, projects, experience, contact)
-├── styles.css      # Theme, animations, responsive styling, forms
-├── script.js       # GitHub projects/skills integration and fallback handling
-└── README.md       # Documentation
+├── index.html                        # Portfolio structure and content
+├── styles.css                        # Modern visuals, animations, responsive styling
+├── script.js                         # GitHub data loading, LinkedIn setup, contact interactions
+├── scripts/check-merge-conflicts.sh  # Marker guard utility
+├── .githooks/pre-commit              # Optional pre-commit hook entry
+└── README.md                         # Documentation
 ```
-
-## Data loading behavior
-
-The site calls:
-
-```text
-https://api.github.com/users/samyoghosh2004/repos?sort=updated&per_page=100
-```
-
-Then it:
-1. Filters out forked repositories.
-2. Sorts repositories by latest update date.
-3. Renders up to 9 recent repositories.
-4. Enriches skill pills from repo language metadata.
-5. Shows curated project cards if GitHub data is unavailable.
 
 ## Run locally
 
@@ -63,35 +57,12 @@ python3 -m http.server 8000
 
 Open `http://localhost:8000`.
 
-## Before submitting applications
-
-- Add your real phone number in `index.html` if you want it visible.
-- Place your resume file as `RESUME.pdf` in project root.
-- Optionally add LinkedIn and deployment links.
-- Replace the placeholder education statement with your exact college and degree details.
-- Keep GitHub repositories updated for best project visibility.
-
-
-## Quality improvements
-
-- Project cards now use safe DOM construction (no untrusted HTML injection).
-- Added fallback reveal behavior for browsers without `IntersectionObserver`.
-- Improved keyboard accessibility with visible focus states for interactive elements.
-- Contact form behavior is handled in JavaScript with in-page status feedback.
-
-
 ## Prevent merge-conflict mistakes (recommended)
 
-To prevent accidentally committing unresolved conflict markers like `<<<<<<<`, enable the repository pre-commit hook:
+Enable repository hooks:
 
 ```bash
 git config core.hooksPath .githooks
 ```
 
-Then every commit will run:
-
-```bash
-scripts/check-merge-conflicts.sh
-```
-
-This blocks commits if markers such as `<<<<<<<`, `=======`, or `>>>>>>>` are present.
+The pre-commit hook runs `scripts/check-merge-conflicts.sh` and blocks commits containing `<<<<<<<`, `=======`, or `>>>>>>>`.
