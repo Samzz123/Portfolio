@@ -31,22 +31,34 @@ const fallbackProjects = [
 const projectGrid = document.getElementById('project-grid');
 const skillsCloud = document.getElementById('skills-cloud');
 const githubCta = document.getElementById('github-cta');
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  },
-  { threshold: 0.18 }
-);
+function setupRevealAnimations() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+    return;
+  }
 
-document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.18 }
+  );
+
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+}
 
 function formatDate(dateString) {
   const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) {
+    return 'recently';
+  }
   return date.toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'short',
@@ -57,14 +69,26 @@ function createProjectCard(repo) {
   const card = document.createElement('article');
   card.className = 'card project-card';
 
-  card.innerHTML = `
-    <h3>${repo.name}</h3>
-    <p>${repo.description ?? 'No description provided for this repository yet.'}</p>
-    <div class="meta">
-      <span>${repo.language ?? 'Mixed stack'} • Updated ${formatDate(repo.updated_at)}</span>
-      <a href="${repo.html_url}" target="_blank" rel="noreferrer">Open</a>
-    </div>
-  `;
+  const title = document.createElement('h3');
+  title.textContent = repo.name;
+
+  const description = document.createElement('p');
+  description.textContent = repo.description ?? 'No description provided for this repository yet.';
+
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+
+  const info = document.createElement('span');
+  info.textContent = `${repo.language ?? 'Mixed stack'} • Updated ${formatDate(repo.updated_at)}`;
+
+  const link = document.createElement('a');
+  link.href = repo.html_url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = 'Open';
+
+  meta.append(info, link);
+  card.append(title, description, meta);
 
   return card;
 }
@@ -137,7 +161,7 @@ function useFallbackContent(reason) {
 }
 
 async function loadGitHubData() {
-  projectGrid.innerHTML = '<p class="loading">Fetching repositories from GitHub...</p>';
+  projectGrid.innerHTML = '<p class="loading" role="status" aria-live="polite">Fetching repositories from GitHub...</p>';
 
   try {
     const response = await fetch(repoApi, {
@@ -168,16 +192,11 @@ async function loadGitHubData() {
   }
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
-githubCta.href = `https://github.com/${githubUser}`;
+function setupContactForm() {
+  if (!contactForm || !formStatus) {
+    return;
+  }
 
-loadGitHubData();
-
-
-const contactForm = document.getElementById('contact-form');
-const formStatus = document.getElementById('form-status');
-
-if (contactForm && formStatus) {
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(contactForm);
@@ -186,3 +205,12 @@ if (contactForm && formStatus) {
     contactForm.reset();
   });
 }
+
+document.getElementById('year').textContent = new Date().getFullYear();
+if (githubCta) {
+  githubCta.href = `https://github.com/${githubUser}`;
+}
+
+setupRevealAnimations();
+setupContactForm();
+loadGitHubData();

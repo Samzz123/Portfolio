@@ -70,3 +70,11 @@ Open `http://localhost:8000`.
 - Optionally add LinkedIn and deployment links.
 - Replace the placeholder education statement with your exact college and degree details.
 - Keep GitHub repositories updated for best project visibility.
+
+
+## Quality improvements
+
+- Project cards now use safe DOM construction (no untrusted HTML injection).
+- Added fallback reveal behavior for browsers without `IntersectionObserver`.
+- Improved keyboard accessibility with visible focus states for interactive elements.
+- Contact form behavior is handled in JavaScript with in-page status feedback.

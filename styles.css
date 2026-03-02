@@ -71,6 +71,11 @@ body {
   pointer-events: none;
 }
 
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
 .hero {
   padding: 1.25rem;
 }
@@ -355,4 +360,13 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
 }
